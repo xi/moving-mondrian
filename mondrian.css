@@ -21,3 +21,9 @@
 .mondrian div[data-dir="vertical"] {
 	grid-template-rows: var(--a) var(--b);
 }
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		color-scheme: dark;
+	}
+}
