@@ -1,0 +1,23 @@
+.mondrian {
+	--gap: 1em;
+	background-color: black;
+	padding: var(--gap);
+	height: 60vh;
+	width: 50vw;
+	margin: 15vh auto 0;
+	box-shadow: 0 0 1em rgba(0,0,0,0.5);
+}
+.mondrian div {
+	height: 100%;
+	display: grid;
+	--a: calc((100% + var(--gap)) * var(--pos) - var(--gap));
+	--b: calc((100% + var(--gap)) * (1 - var(--pos)) - var(--gap));
+	gap: min(var(--gap), var(--a) + var(--gap), var(--b) + var(--gap), 100%);
+	box-sizing: border-box;
+}
+.mondrian div[data-dir="horizontal"] {
+	grid-template-columns: var(--a) var(--b);
+}
+.mondrian div[data-dir="vertical"] {
+	grid-template-rows: var(--a) var(--b);
+}
