@@ -82,10 +82,10 @@ var animate = function(element, delta) {
 		}
 
 		var rect = element.getBoundingClientRect();
-		if (rect.height > rect.width) {
-			div.dataset.dir = (Math.random() < 0.2) ? "vertical" : "horizontal";
+		if (Math.random() * rect.height < 0.5 * rect.width) {
+			div.dataset.dir = "vertical";
 		} else {
-			div.dataset.dir = (Math.random() < 0.8) ? "vertical" : "horizontal";
+			div.dataset.dir = "horizontal";
 		}
 	}
 };
