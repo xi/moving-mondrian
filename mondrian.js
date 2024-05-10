@@ -18,12 +18,12 @@ var createLeaf = function() {
 var getSize = function(element) {
 	var rect = element.getBoundingClientRect();
 	return rect.width * rect.height;
-}
+};
 
 var getRelSize = function(element) {
 	var root = element.closest(".mondrian");
 	return getSize(element) / getSize(root);
-}
+};
 
 var easing = function(x) {
 	return (Math.pow(x * 2 - 1, 3) + 1) / 2;
