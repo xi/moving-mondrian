@@ -1,4 +1,7 @@
-var speed = 3;  // percent per second
+var speed = 2;  // percent per second
+var easing_factor = 0.6;
+var easing_max = Math.tan(Math.PI / 2 * easing_factor);
+
 
 var createLeaf = function() {
 	var element = document.createElement("div");
@@ -26,11 +29,15 @@ var getRelSize = function(element) {
 };
 
 var easing = function(x) {
-	return (Math.pow(x * 2 - 1, 3) + 1) / 2;
+	var xx = (x - 0.5) * Math.PI * easing_factor;
+	var yy = Math.tan(xx);
+	return yy / easing_max / 2 + 0.5;
 };
 
 var easing_inverse = function(y) {
-	return (Math.cbrt(y * 2 - 1) + 1) / 2;
+	var yy = (y - 0.5) * 2 * easing_max;
+	var xx = Math.atan(yy);
+	return xx / easing_factor / Math.PI + 0.5;
 };
 
 var animate = function(element, delta) {
