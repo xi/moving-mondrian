@@ -16,10 +16,10 @@
 	box-sizing: border-box;
 }
 .mondrian div[data-dir="horizontal"] {
-	grid-template-columns: var(--a) var(--b);
+	grid-template-rows: var(--a) var(--b);
 }
 .mondrian div[data-dir="vertical"] {
-	grid-template-rows: var(--a) var(--b);
+	grid-template-columns: var(--a) var(--b);
 }
 
 @media (prefers-color-scheme: dark) {
