@@ -80,7 +80,13 @@ var animate = function(element, delta) {
 			div.append(element);
 			div.append(other);
 		}
-		div.dataset.dir = (Math.random() < 0.5) ? "vertical" : "horizontal";
+
+		var rect = element.getBoundingClientRect();
+		if (rect.height > rect.width) {
+			div.dataset.dir = (Math.random() < 0.2) ? "vertical" : "horizontal";
+		} else {
+			div.dataset.dir = (Math.random() < 0.8) ? "vertical" : "horizontal";
+		}
 	}
 };
 
