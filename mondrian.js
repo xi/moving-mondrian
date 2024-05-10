@@ -1,4 +1,4 @@
-var speed = 2;  // percent per second
+var speed = 3;  // percent per second
 
 var createLeaf = function() {
 	var element = document.createElement("div");
@@ -25,6 +25,14 @@ var getRelSize = function(element) {
 	return getSize(element) / getSize(root);
 }
 
+var easing = function(x) {
+	return (Math.pow(x * 2 - 1, 3) + 1) / 2;
+};
+
+var easing_inverse = function(y) {
+	return (Math.cbrt(y * 2 - 1) + 1) / 2;
+};
+
 var animate = function(element, delta) {
 	if (element.children.length) {
 		for (var i = 0; i < element.children.length; i++) {
@@ -32,21 +40,22 @@ var animate = function(element, delta) {
 		}
 
 		var pos = parseFloat(element.style.getPropertyValue("--pos"));
+		var x = easing_inverse(pos);
 		if (element.dataset.grow) {
-			pos += delta / 1000 / 100 * speed;
-			if (pos >= 1){
+			x += delta / 1000 / 100 * speed;
+			if (x >= 1){
 				element.before(element.children[0]);
 				element.remove();
 			} else {
-				element.style.setProperty("--pos", pos);
+				element.style.setProperty("--pos", easing(x));
 			}
 		} else {
-			pos -= delta / 1000 / 100 * speed;
-			if (pos <= 0){
+			x -= delta / 1000 / 100 * speed;
+			if (x <= 0){
 				element.before(element.children[1]);
 				element.remove();
 			} else {
-				element.style.setProperty("--pos", pos);
+				element.style.setProperty("--pos", easing(x));
 			}
 		}
 	} else if (Math.random() < delta / 1000 * getRelSize(element)){
