@@ -34,10 +34,9 @@ var easing = function(x) {
 	return yy / easing_max / 2 + 0.5;
 };
 
-var easing_inverse = function(y) {
-	var yy = (y - 0.5) * 2 * easing_max;
-	var xx = Math.atan(yy);
-	return xx / easing_factor / Math.PI + 0.5;
+var setPos = function(element, x) {
+	element.style.setProperty("--pos-raw", x);
+	element.style.setProperty("--pos", easing(x));
 };
 
 var animate = function(element, delta) {
@@ -46,15 +45,14 @@ var animate = function(element, delta) {
 			animate(element.children[i], delta);
 		}
 
-		var pos = parseFloat(element.style.getPropertyValue("--pos"));
-		var x = easing_inverse(pos);
+		var x = parseFloat(element.style.getPropertyValue("--pos-raw"));
 		if (element.dataset.grow) {
 			x += delta / 1000 / 100 * speed;
 			if (x >= 1){
 				element.before(element.children[0]);
 				element.remove();
 			} else {
-				element.style.setProperty("--pos", easing(x));
+				setPos(element, x);
 			}
 		} else {
 			x -= delta / 1000 / 100 * speed;
@@ -62,7 +60,7 @@ var animate = function(element, delta) {
 				element.before(element.children[1]);
 				element.remove();
 			} else {
-				element.style.setProperty("--pos", easing(x));
+				setPos(element, x);
 			}
 		}
 	} else if (Math.random() < delta / 1000 * getRelSize(element)){
@@ -72,11 +70,11 @@ var animate = function(element, delta) {
 		element.before(div);
 		if (grow) {
 			div.dataset.grow = true;
-			div.style.setProperty("--pos", 0);
+			setPos(div, 0);
 			div.append(other);
 			div.append(element);
 		} else {
-			div.style.setProperty("--pos", 1);
+			setPos(div, 1);
 			div.append(element);
 			div.append(other);
 		}
