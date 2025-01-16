@@ -1,7 +1,5 @@
 var speed = 2;  // percent per second
-var easing_factor = 0.6;
-var easing_max = Math.tan(Math.PI / 2 * easing_factor);
-
+var easingWeight = 0.6;
 
 var createLeaf = function() {
 	var element = document.createElement("div");
@@ -29,9 +27,9 @@ var getRelSize = function(element) {
 };
 
 var easing = function(x) {
-	var xx = (x - 0.5) * Math.PI * easing_factor;
-	var yy = Math.tan(xx);
-	return yy / easing_max / 2 + 0.5;
+	var xx = (x - 0.5) * 2;
+	var y = Math.pow(xx, 5) * easingWeight + xx * (1 - easingWeight);
+	return y / 2 + 0.5;
 };
 
 var setPos = function(element, x) {
