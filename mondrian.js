@@ -48,7 +48,7 @@ var animate = function(element, delta) {
 		var x = parseFloat(element.style.getPropertyValue("--pos-raw"));
 		if (element.dataset.grow) {
 			x += delta / 1000 / 100 * speed;
-			if (x >= 1){
+			if (x >= 1) {
 				element.before(element.children[0]);
 				element.remove();
 			} else {
@@ -56,14 +56,14 @@ var animate = function(element, delta) {
 			}
 		} else {
 			x -= delta / 1000 / 100 * speed;
-			if (x <= 0){
+			if (x <= 0) {
 				element.before(element.children[1]);
 				element.remove();
 			} else {
 				setPos(element, x);
 			}
 		}
-	} else if (Math.random() < delta / 1000 * getRelSize(element)){
+	} else if (Math.random() < delta / 1000 * getRelSize(element)) {
 		var grow = Math.random() < 0.5;
 		var div = document.createElement("div");
 		var other = createLeaf();
